@@ -3,7 +3,7 @@ let cities = [];
 
 fs.readFile('employees.json', (err, data) => {
     if (err) {
-      console.error('שגיאה בקריאת קובץ JSON', err);
+      console.error("Error writing JSON file", err);
     } else {
         cities = JSON.parse(data).cities; 
     }

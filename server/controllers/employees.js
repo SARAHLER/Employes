@@ -3,7 +3,7 @@ const fs = require('fs');
 let employees = []; 
 fs.readFile('employees.json', (err, data) => {
     if (err) {
-      console.error('שגיאה בקריאת קובץ JSON', err);
+      console.error("Error writing JSON file", err);
     } else {
       employees = JSON.parse(data).employees; 
     }
@@ -18,12 +18,12 @@ const addemployee = async (req, res) => {
 
   fs.writeFile("employees.json", JSON.stringify({ employees }), (err) => {
     if (err) {
-      console.error("שגיאה בכתיבת קובץ JSON", err);
+      console.error("Error writing JSON file", err);
     } else {
-      console.log("נתונים עודכנו בהצלחה");
+      console.log("Data updated successfully");
     }
   });
-  res.json({ message: 'עובד חדש נוסף בהצלחה' });
+  res.json({ message: "Successfully added a new employee" });
 };
 
 const deleteEmployees = async (req, res) => {
@@ -32,37 +32,33 @@ const deleteEmployees = async (req, res) => {
 
   fs.writeFile('employees.json', JSON.stringify({ employees }), (err) => {
     if (err) {
-      console.error('שגיאה בכתיבת קובץ JSON', err);
+      console.error("Error writing JSON file", err);
     } else {
-      console.log('נתונים עודכנו בהצלחה');
+      console.log("Data updated successfully");
     }
   });
 
-  res.json({ message: 'עובד נמחק בהצלחה' });
+  res.json({ message: 'Employee deleted successfully' });
 };
 const editEmployee = async (req, res) => {
-    const { EmployeeID } = req.params; // מקבל את הפרמטר מה-URL
-    const updatedEmployee = req.body; // מקבל את הנתונים המעודכנים מהבקשה
+    const { EmployeeID } = req.params; 
+    const updatedEmployee = req.body; 
   
-    // מחפש את העובד במערך לפי ה-ID
     const employeeIndex = employees.findIndex((employee) => employee.EmployeeID === EmployeeID);
   
-    // אם לא מצא את העובד, מחזיר שגיאה 404
     if (employeeIndex === -1) {
-      return res.status(404).json({ message: 'עובד לא נמצא' });
+      return res.status(404).json({ message: 'Employee not found' });
     }
   
-    // מחליף את העובד הקיים במערך עם העובד המעודכן
     employees[employeeIndex] = updatedEmployee;
   
-    // כתיבת המערך לקובץ JSON
     fs.writeFile('employees.json', JSON.stringify({ employees }), (err) => {
       if (err) {
-        console.error('שגיאה בכתיבת קובץ JSON', err);
-        return res.status(500).json({ message: 'שגיאה בעדכון נתונים' });
+        console.error("Error writing JSON file", err);
+        return res.status(500).json({ message: 'Error updating data' });
       } else {
-        console.log('נתונים עודכנו בהצלחה');
-        return res.json({ message: 'עובד עודכן בהצלחה' });
+        console.log("Data updated successfully");
+        return res.json({ message: 'Employee updated successfully' });
       }
     });
   };
