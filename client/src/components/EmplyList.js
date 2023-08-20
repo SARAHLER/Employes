@@ -90,8 +90,7 @@ function EmployeeList() {
             severity="success"
             sx={{ width: '100%' }}
           >
-            העובד נמחק בהצלחה!
-          </Alert>
+The employee was successfully deleted!          </Alert>
         </Snackbar>
             <Link to={`/editEmployee/${employee.EmployeeID}`}>
               <IconButton color="primary" aria-label="ערוך">

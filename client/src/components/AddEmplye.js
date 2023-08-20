@@ -51,20 +51,23 @@ function AddEmployee() {
       Gender: "",
     },
     validationSchema: Yup.object({
-      EmployeeID: Yup.string().required("שדה חובה"),
+      EmployeeID: Yup.string().required("require"),
       Name: Yup.string()
-        .required("שדה חובה")
-        .matches(/^[\u0590-\u05FF\s]+$/, "שם יכול להכיל רק אותיות בעברית"),
-      City: Yup.string().required("שדה חובה"),
-      Department: Yup.string().required("שדה חובה"),
-      Gender: Yup.string().required("שדה חובה"),
+        .required("require")
+        .matches(
+          /^[\u0590-\u05FF\s]+$/,
+          "A name can only contain Hebrew letters"
+        ),
+      City: Yup.string().required("require"),
+      Department: Yup.string().required("require"),
+      Gender: Yup.string().required("require"),
     }),
 
     onSubmit: (values) => {
       axios
         .post(`${API_BASE_URL}/employees`, values)
         .then((response) => {
-          if (response.data.message === "עובד חדש נוסף בהצלחה") {
+          if (response.data.message === "New employee successfully added") {
             setSuccessMessage(true);
             setTimeout(() => {
               navigate("/listEmployees");
@@ -81,7 +84,7 @@ function AddEmployee() {
       sx={{ margin: "0 auto", marginTop: "50px", padding: "20px" }}
     >
       <Typography variant="h6">
-        <strong>הוסף עובד חדש</strong>
+        <strong>Add a new employee</strong>
       </Typography>
       <Paper elevation={3} style={{ padding: "20px" }}>
         <form onSubmit={formik.handleSubmit}>
@@ -164,7 +167,7 @@ function AddEmployee() {
                 color="primary"
                 fullWidth
               >
-                הוסף
+                create
               </Button>
             </Grid>
           </Grid>
@@ -180,7 +183,7 @@ function AddEmployee() {
           severity="success"
           sx={{ width: "100%" }}
         >
-          העובד נוסף בהצלחה!
+          The employee was successfully added!
         </Alert>
       </Snackbar>
     </Container>

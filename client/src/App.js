@@ -9,7 +9,6 @@ function App() {
     
     <Banner/>
     <Routes>
-          {/* <Route path="/" exact component={Banner} /> */}
           <Route path="/addEmployee" element={<AddEmplye/>} />
           <Route path="/listEmployees" element={<ListEmployees/>} />
           <Route path="/editEmployee/:EmployeeID" element={<EditEmployee />} />
