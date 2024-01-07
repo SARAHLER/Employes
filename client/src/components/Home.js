@@ -1,7 +1,5 @@
 import * as React from "react";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
+import {AppBar,Box,Toolbar} from "@mui/material";
 import { Link } from "react-router-dom";
 
 export default function Banner() {
