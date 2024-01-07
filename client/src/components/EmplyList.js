@@ -12,11 +12,9 @@ import {
   Alert,
   Snackbar
 } from "@mui/material";
-import DeleteIcon from "@mui/icons-material/Delete";
-import EditIcon from "@mui/icons-material/Edit";
+import {Edit as EditIcon,Delete as DeleteIcon  } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import API_BASE_URL from './apiConfig';
-
 
 function EmployeeList() {
   const [employees, setEmployees] = useState([]);
