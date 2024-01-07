@@ -3,21 +3,15 @@ import { useParams } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-import Container from '@mui/material/Container';
-import Paper from '@mui/material/Paper';
-import Typography from '@mui/material/Typography';
+import {Typography,Paper,Container,Button,TextField} from '@mui/material';
 
 
 function EditEmployee() {
-  // שלוף את ה-params מה-URL
   const { EmployeeID } = useParams();
 
   const [employee, setEmployee] = useState(null);
 
   useEffect(() => {
-    // השתמש ב-EmployeeID מה-params כדי לשלוף את העובד מהשרת
     axios
       .get(`http://localhost:3000/editEmployee/${EmployeeID}`)
       .then((response) => {
@@ -30,7 +24,7 @@ function EditEmployee() {
 
   const formik = useFormik({
     initialValues: {
-      EmployeeID: '', // כאן אל תשים ערך ריק, הערך ייקח אותו מהשרת
+      EmployeeID: '', 
       Name: '',
       City: '',
       Department: '',
@@ -49,7 +43,6 @@ function EditEmployee() {
         .then((response) => {
           if (response.data.message === 'עובד עודכן בהצלחה') {
             // התמוטטות לדף הרשימה של העובדים לאחר עדכון הפרטים
-            // אפשר להוסיף כאן הודעת הצלחה או מילוי נוסף
           }
         })
         .catch((error) => console.error('Error updating employee data:', error));
